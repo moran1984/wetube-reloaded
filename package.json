@@ -1,0 +1,16 @@
+{
+  "name": "wetube",
+  "version": "1.0.0",
+  "description": "Youtube Clone",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moran1984/wetube-reloaded.git"
+  },
+  "author": "cloDev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moran1984/wetube-reloaded/issues"
+  },
+  "homepage": "https://github.com/moran1984/wetube-reloaded#readme"
+}
