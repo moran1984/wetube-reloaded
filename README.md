@@ -25,7 +25,7 @@
 
 # video 관련 라우터 -> Video Router
 
+/videos/upload -> Upload Video
 /videos/:id -> Watch Video
 /videos/:id/edit -> Edit Video
 /videos/:id/delete -> Delete Video
-/videos/upload -> Upload Video
