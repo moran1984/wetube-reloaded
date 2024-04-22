@@ -1,5 +1,4 @@
-export const trending = (req, res) =>
-  res.render("home", { pageTitle: "Comes from your controller" });
+export const trending = (req, res) => res.render("home", { pageTitle: "Home" });
 export const see = (req, res) => {
   return res.render("watch");
 };
