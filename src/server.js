@@ -11,9 +11,8 @@ const logger = morgan("dev");
 
 app.set("view engine", "pug");
 app.set("views", `${process.cwd()}/src/views`);
-app.set("x-powered-by", false);
-
 app.use(logger);
+app.use(express.urlencoded({ extended: true }));
 app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
