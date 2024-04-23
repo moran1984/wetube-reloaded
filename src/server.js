@@ -6,8 +6,6 @@ import userRouter from "./routers/userRouter";
 
 const PORT = 4000;
 
-console.log(process.cwd());
-
 const app = express(); // 시작
 const logger = morgan("dev");
 
