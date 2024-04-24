@@ -4,7 +4,7 @@ let videos = [
     rating: 5,
     comments: 2,
     createdAt: "2 minutes ago",
-    views: 1,
+    views: 15,
     id: 1,
   },
   {
@@ -39,7 +39,17 @@ export const getEdit = (req, res) => {
 };
 export const postEdit = (req, res) => {
   const { id } = req.params;
+  console.log(req.body);
   const { title } = req.body;
   videos[id - 1].title = title;
   return res.redirect(`/videos/${id}`);
+};
+
+export const getUpload = (req, res) => {
+  return res.render("upload", { pageTitle: "Upload Video" });
+};
+
+export const postUpload = (req, res) => {
+  // here we will add a video to the videos array.
+  return res.redirect("/");
 };
