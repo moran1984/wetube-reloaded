@@ -7,7 +7,7 @@
     "url": "git+https://github.com/moran1984/wetube-reloaded.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/init.js"
   },
   "author": "cloDev",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "@babel/core": "^7.24.4",
     "@babel/node": "^7.23.9",
     "@babel/preset-env": "^7.24.4",
+    "@eslint/js": "^9.1.1",
     "nodemon": "^3.1.0"
   }
 }
