@@ -1,3 +1,4 @@
+import { json } from "express";
 import Video from "../models/Video";
 
 // Video.find({},(error,videos) => {})
@@ -31,15 +32,17 @@ export const getUpload = (req, res) => {
 
 export const postUpload = async (req, res) => {
   const { title, description, hashtags } = req.body;
-  Video.create({
-    title,
-    description,
-    hashtags: hashtags.split(",").map((word) => `#${word}`),
-    createdAt: Date.now(),
-    meta: {
-      views: 0,
-      rating: 0,
-    },
-  });
-  return res.redirect("/");
+  try {
+    await Video.create({
+      title,
+      description,
+      hashtags: hashtags.split(",").map((word) => `#${word}`),
+    });
+    return res.redirect("/");
+  } catch (err) {
+    return res.render("upload", {
+      pageTitle: "Upload Video",
+      errorMessage: err._message,
+    });
+  }
 };
