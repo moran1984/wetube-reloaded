@@ -1,7 +1,5 @@
 import Video from "../models/Video";
 
-// Video.find({},(error,videos) => {})
-
 export const home = async (req, res) => {
   try {
     const videos = await Video.find({});
@@ -13,7 +11,6 @@ export const home = async (req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
-  console.log(video);
   if (!video) {
     return res.render("404", { pageTitle: "Video not Found." });
   }
@@ -61,4 +58,10 @@ export const postUpload = async (req, res) => {
       errorMessage: err._message,
     });
   }
+};
+
+export const deleteVideo = async (req, res) => {
+  const { id } = req.params;
+  await Video.findByIdAndDelete(id);
+  return res.redirect("/");
 };
