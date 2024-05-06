@@ -19,7 +19,7 @@ export const watch = async (req, res) => {
 export const getEdit = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
-  if (video === null) {
+  if (!video) {
     return res.render("404", { pageTitle: "Video not Found." });
   }
   return res.render("edit", { pageTitle: `Edit [ ${video.title} ]`, video });
@@ -66,10 +66,15 @@ export const deleteVideo = async (req, res) => {
   return res.redirect("/");
 };
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   const { keyword } = req.query;
+  let videos = [];
   if (keyword) {
-    //search
+    videos = await Video.find({
+      title: {
+        $regex: new RegExp(`${keyword}$`, "i"),
+      },
+    });
   }
-  return res.render("search", { pageTitle: "Search" });
+  return res.render("search", { pageTitle: "Search", videos });
 };
