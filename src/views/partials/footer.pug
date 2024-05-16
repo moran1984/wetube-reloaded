@@ -1,1 +1,7 @@
-footer &copy; #{new Date().getFullYear()} Wetube 
+footer 
+    - const currentYear = new Date().getFullYear();
+    - const since = 2024
+    if since === 2024
+        | &copy; 2024 Wetube
+    else 
+        | &copy; #{since} - #{currentYear} Wetube
