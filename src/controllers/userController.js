@@ -142,22 +142,58 @@ export const logout = (req, res) => {
   return res.redirect("/");
 };
 export const getEdit = async (req, res) => {
-  return res.render("edit-profile");
+  return res.render("edit-profile", { pageTitle: "Update Profile" });
 };
 export const postEdit = async (req, res) => {
   const {
+    body: { name, email, username, location },
     session: {
       user: { _id },
     },
-    body: { name, email, username, location },
   } = req;
-  console.log(req.session.user);
-  await User.findByIdAndUpdate(_id, {
-    name,
-    email,
-    username,
-    location,
-  });
-  return res.render("edit-profile", {});
+  const currentUser = req.session.user;
+  if (currentUser.email !== email) {
+    const emailExists = await User.exists({ email });
+    if (emailExists) {
+      return res.render("edit-profile", {
+        pageTitle: "Update Profile",
+        errorMessage: "This email is already taken.",
+      });
+    }
+  }
+
+  if (currentUser.username !== username) {
+    const usernameExists = await User.exists({ username });
+    if (usernameExists) {
+      return res.render("edit-profile", {
+        pageTitle: "Update Profile",
+        errorMessage: "This username is already taken.",
+      });
+    }
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true },
+  );
+  req.session.user = updatedUser;
+  return res.redirect("/users/edit");
 };
+
+export const getChangePassword = (req, res) => {
+  if (req.session.user.socialOnly === true) {
+    return res.redirect("/");
+  }
+  return res.render("users/change-password", { pageTitle: "Change Password" });
+};
+export const postChangePassword = (req, res) => {
+  return res.redirect("/");
+};
+
 export const see = (req, res) => res.send("See User");
