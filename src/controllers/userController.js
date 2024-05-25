@@ -146,11 +146,13 @@ export const getEdit = async (req, res) => {
 };
 export const postEdit = async (req, res) => {
   const {
+    file,
     body: { name, email, username, location },
     session: {
       user: { _id },
     },
   } = req;
+  console.log(file);
   const currentUser = req.session.user;
   if (currentUser.email !== email) {
     const emailExists = await User.exists({ email });
