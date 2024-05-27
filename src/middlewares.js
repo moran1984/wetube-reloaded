@@ -4,6 +4,12 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.siteName = "Wetube";
   res.locals.loggedInUser = req.session.user || {};
+  // if (res.locals.loggedInUser.avatarUrl) {
+  //   res.locals.loggedInUser.avatarUrl =
+  //     res.locals.loggedInUser.avatarUrl.replace(/\\/g, "/");
+  // }
+
+  // console.log(res.locals.loggedInUser);
   next();
 };
 

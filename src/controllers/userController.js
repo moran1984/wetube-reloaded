@@ -152,7 +152,6 @@ export const postEdit = async (req, res) => {
       user: { _id, avatarUrl },
     },
   } = req;
-  console.log(file);
   const currentUser = req.session.user;
   if (currentUser.email !== email) {
     const emailExists = await User.exists({ email });
@@ -186,6 +185,7 @@ export const postEdit = async (req, res) => {
     { new: true },
   );
   req.session.user = updatedUser;
+
   return res.redirect("/users/edit");
 };
 
