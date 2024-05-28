@@ -3,3 +3,4 @@
 .env
 /uploads
 webpack.config.js
+/assets
