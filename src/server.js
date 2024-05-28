@@ -1,5 +1,4 @@
 import express from "express";
-import path from "path";
 import morgan from "morgan";
 import session from "express-session";
 import MongoStore from "connect-mongo";
