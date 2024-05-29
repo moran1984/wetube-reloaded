@@ -103,7 +103,9 @@ export const postUpload = async (req, res) => {
 
 export const deleteVideo = async (req, res) => {
   const {
-    session: { _id },
+    session: {
+      user: { _id },
+    },
     params: { id },
   } = req;
   const video = await Video.findById(id);
@@ -128,7 +130,7 @@ export const search = async (req, res) => {
       title: {
         $regex: new RegExp(`${keyword}`, "i"),
       },
-    });
+    }).populate("owner");
   }
   return res.render("search", { pageTitle: "Search", videos });
 };
