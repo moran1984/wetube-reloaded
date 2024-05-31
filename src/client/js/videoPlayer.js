@@ -10,7 +10,7 @@ const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 
 let controlsTimeout = null;
-
+let controlsMovementTimeout = null;
 let volumeValue = 0.5;
 video.volume = volumeValue;
 
@@ -92,18 +92,26 @@ const handleFullScreen = () => {
     fullScreenBtn.innerText = "Exit Full Screen";
   }
 };
+
+const hideControls = () => videoControls.classList.remove("showing");
+
 const handleMouseMove = () => {
   if (controlsTimeout) {
     clearTimeout(controlsTimeout);
     controlsTimeout = null;
   }
-  videoControls.classList.add("showing");
+
+  if (controlsMovementTimeout) {
+    // 스텝 3. 조건문 실행
+    clearTimeout(controlsMovementTimeout); // 스텝 4. 스텝 2에서 작동된 함수(타임아웃) 삭제
+    controlsMovementTimeout = null; // 스텝 5. 값은 null로 대임
+  }
+  videoControls.classList.add("showing"); // 스텝 1.비디오 컨트롤러 보여줌
+  controlsMovementTimeout = setTimeout(hideControls, 3000); //  스텝 2. 타임아웃 시작 & 3초뒤 컨트롤러 숨김
 };
 
 const handleMouseLeave = () => {
-  controlsTimeout = setTimeout(() => {
-    videoControls.classList.remove("showing");
-  }, 3000);
+  controlsTimeout = setTimeout(hideControls, 1000);
 };
 
 window.addEventListener("keydown", handleSkip);
