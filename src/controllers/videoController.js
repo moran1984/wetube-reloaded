@@ -134,3 +134,16 @@ export const search = async (req, res) => {
   }
   return res.render("search", { pageTitle: "Search", videos });
 };
+
+export const registerView = async () => {
+  const {
+    params: { id },
+  } = req;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.status(404);
+  }
+  video.meta.views = video.meta.views + 1;
+  await video.save();
+  return res.status(200);
+};
