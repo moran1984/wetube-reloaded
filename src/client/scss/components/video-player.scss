@@ -1,0 +1,51 @@
+#videoContainer {
+  width: 100%;
+  position: relative;
+  video {
+    width: 100%;
+  }
+  .videoControls {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    &.showing {
+      opacity: 1;
+    }
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: rgba($color: #000, $alpha: 0.8);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 10px;
+    gap: 10px;
+    .videoControls__functions {
+      display: flex;
+      justify-content: space-between;
+      .videoControls__functions-left {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 15px;
+        font-size: 18px;
+        .videoControls__play {
+          margin-left: 5px;
+        }
+      }
+      .videoControls__functions-right {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        align-items: center;
+        font-size: 18px;
+        .videoControls__volume {
+        }
+        .videoControls__screen {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
